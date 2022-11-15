@@ -1,4 +1,6 @@
-* {
+@import "~bootstrap/dist/css/bootstrap";
+
+/* * {
     box-sizing: border-box;
 }
 
@@ -48,4 +50,4 @@ main {
 
 #form_main_btn button:hover {
     background: teal;
-}
+} */
