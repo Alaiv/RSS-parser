@@ -27,6 +27,7 @@
     "eslint-plugin-import": "^2.24.2",
     "eslint-plugin-jest": "^24.4.0",
     "file-loader": "^6.2.0",
+    "i18next": "^22.0.5",
     "jest": "^27.1.1",
     "jest-cli": "^27.1.1",
     "npm-check-updates": "^11.8.5",

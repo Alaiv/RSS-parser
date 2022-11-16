@@ -1,6 +1,5 @@
 
-const renderError = (element, err) => {
-    const nextElement = element.nextElementSibling
+const renderError = (element, err, nextElement) => {
     if (nextElement) {
         nextElement.textContent = err;
         return;
@@ -13,21 +12,21 @@ const renderError = (element, err) => {
     element.after(errDiv);
 }
 
-const removeError = (element) => {
+const renderErrors = (element, err, isValid) => {
     const nextElement = element.nextElementSibling
-    if (!nextElement) return;
-    element.classList.remove('is-invalid');
-    element.nextElementSibling.remove();
+    if (isValid) {
+        if (!nextElement) return;
+        element.classList.remove('is-invalid');
+        element.nextElementSibling.remove();
+    } else {
+        renderError(element, err, nextElement);
+    }
 }
 
 const render = (form, inp, state) => {
     const {rssField} = state;
-
-    if (!rssField.valid) {
-        renderError(inp, rssField.errors[0]);
-    } else {
-        removeError(inp);
-    }
+    
+    renderErrors(inp, rssField.errors[0], rssField.valid)
 }
 
 export default render;
