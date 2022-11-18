@@ -1,10 +1,6 @@
 import fetchRss, { checkForRssUpdates } from "./fetchRss";
 
-const validateForm = (form, input, watchedState, schema, i18nInstance) => {
-    form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const data = new FormData(e.target);
-        const fieldValue = data.get('url');
+const validateForm = (form, input, watchedState, schema, i18nInstance, fieldValue) => {
         watchedState.rssField.value = fieldValue;
         
         const value = watchedState.rssField.value;
@@ -21,7 +17,10 @@ const validateForm = (form, input, watchedState, schema, i18nInstance) => {
                 watchedState.status = 'fetching';
                 fetchRss(i18nInstance, watchedState, value)
                     .then(() => {
-                        checkForRssUpdates(linksCurr, i18nInstance, watchedState)
+                        if (!watchedState.isUpdating) {
+                            watchedState.isUpdating = true;
+                            setTimeout(() => checkForRssUpdates(linksCurr, i18nInstance, watchedState), 5000)
+                        }
                     })
                     .catch(e => {
                         watchedState.status = 'invalid';
@@ -33,7 +32,6 @@ const validateForm = (form, input, watchedState, schema, i18nInstance) => {
                 watchedState.status = 'invalid';
                 watchedState.rssField.errors = errors;
             });
-    });
 }
 
 export default validateForm;

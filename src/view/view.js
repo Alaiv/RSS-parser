@@ -27,7 +27,7 @@ const renderPosts = (state, i18nInstance, postsContainer, feedsContainer) => {
     postsContainer.append(postsCard);
 }
 
-const render = (form, inp, state, i18nInstance) => {
+const render = (state, i18nInstance) => {
     const postsContainer = document.querySelector('.posts');
     const feedsContainer = document.querySelector('.feeds');
     postsContainer.innerHTML = '';
@@ -41,7 +41,7 @@ const render = (form, inp, state, i18nInstance) => {
     } else {
         button.removeAttribute('disabled');
     }
-    renderPosts(state, i18nInstance, postsContainer, feedsContainer)
+    renderPosts(state, i18nInstance, postsContainer, feedsContainer);
 }
 
 export default render;

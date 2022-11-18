@@ -11,9 +11,8 @@ const insertPosts = (posts, feedId, state) => {
 }
 
 export const checkForRssUpdates = (links, i18nInstance, state) => {
-    const promise = new Promise((resolve) => {
-        links.forEach((link) => {
-            startFetch(link, i18nInstance)
+    const promises = links.map((link) => {
+        return startFetch(link, i18nInstance)
                 .then((data) => {
                     const [feed, posts] = parse(data.contents)
                     const currentPosts = state.posts.map(post => post.title);
@@ -24,10 +23,9 @@ export const checkForRssUpdates = (links, i18nInstance, state) => {
                     }
                 })
                 .catch((e) => console.log(e.message));
-        })
-        resolve(true)
     })
-    promise.then(() => {
+
+    Promise.all(promises).then(() => {
         setTimeout(() => checkForRssUpdates(links, i18nInstance, state), 5000);
     })
 }

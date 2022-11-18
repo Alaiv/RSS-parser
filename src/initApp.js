@@ -22,14 +22,21 @@ const initApp = () => {
             feeds: [],
             posts: [],
             status: null,
+            isUpdating: false
         };
     
         const form = document.querySelector('.rss-form');
         const input = document.querySelector('#url-input')
     
-        const watchedState = onChange(state, () => render(form, input, watchedState, i18nInstance));
-        validateForm(form, input, watchedState, schema, i18nInstance);
-        render(form, input, watchedState, i18nInstance);
+        const watchedState = onChange(state, () => render(watchedState, i18nInstance));
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const data = new FormData(e.target);
+            const fieldValue = data.get('url');
+            validateForm(form, input, watchedState, schema, i18nInstance, fieldValue);
+        })
+        render(watchedState, i18nInstance);
     })
 };
 
