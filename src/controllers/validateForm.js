@@ -1,4 +1,4 @@
-import fetchRss from "../helpers/fetchRss";
+import fetchRss, { checkForRssUpdates } from "./fetchRss";
 
 const validateForm = (form, input, watchedState, schema, i18nInstance) => {
     form.addEventListener('submit', (e) => {
@@ -19,7 +19,14 @@ const validateForm = (form, input, watchedState, schema, i18nInstance) => {
             })
             .then(() => {
                 watchedState.status = 'fetching';
-                fetchRss(i18nInstance, watchedState, value);
+                fetchRss(i18nInstance, watchedState, value)
+                    .then(() => {
+                        checkForRssUpdates(linksCurr, i18nInstance, watchedState)
+                    })
+                    .catch(e => {
+                        watchedState.status = 'invalid';
+                        watchedState.rssField.errors = [e.message];
+                    })
             })
             .catch((err) => {
                 const errors = err.errors.map((err) => i18nInstance.t(err));

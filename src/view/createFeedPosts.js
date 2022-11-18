@@ -1,21 +1,21 @@
-export const readyCard = (title, i18nInstance) => {
-    const postsCard = document.createElement('div');
-    postsCard.classList.add('border-0', 'card');
-    const cardBody = document.createElement('div');
-    cardBody.classList.add('card-body');
-    const h2 = document.createElement('h2');
-    h2.classList.add('card-title', 'h4');
-    h2.textContent = i18nInstance.t(title);
-    cardBody.append(h2);
 
-    const ul = document.createElement('ul');
-    ul.classList.add('list-group', "border-0", 'rounded-0');
-    return [postsCard, cardBody, ul];
-}
+class ReadyData {
+    static readyCard(title, i18nInstance) {
+        const postsCard = document.createElement('div');
+        postsCard.classList.add('border-0', 'card');
+        const cardBody = document.createElement('div');
+        cardBody.classList.add('card-body');
+        const h2 = document.createElement('h2');
+        h2.classList.add('card-title', 'h4');
+        h2.textContent = i18nInstance.t(title);
+        cardBody.append(h2);
+    
+        const ul = document.createElement('ul');
+        ul.classList.add('list-group', "border-0", 'rounded-0');
+        return [postsCard, cardBody, ul];
+    }
 
-
-class AppendData {
-    static feeds(feeds, feedsUl) {
+    static appendFeeds(feeds, feedsUl) {
        feeds.forEach(feed => {
             const li = document.createElement('li');
             li.classList.add('list-group-item', 'border-0', 'border-end-0');
@@ -30,7 +30,7 @@ class AppendData {
         })
     }
 
-    static posts(posts, postsUl) {
+    static appendPosts(posts, postsUl) {
         posts.forEach(post => {
             const li = document.createElement('li');
             li.classList.add('list-group-item', 'd-flex', "justify-content-between", "allign-items-start", "border-0", "border-end-0");
@@ -41,4 +41,4 @@ class AppendData {
     }
 }
 
-export default AppendData;
+export default ReadyData;

@@ -1,5 +1,4 @@
-import AppendData from "../helpers/createFeedPosts";
-import { readyCard } from "../helpers/createFeedPosts";
+import ReadyData from "./createFeedPosts";
 
 const renderMessage = (err, status, i18nInstance) => {
     const element = document.querySelector('.feedback');
@@ -17,10 +16,10 @@ const renderMessage = (err, status, i18nInstance) => {
 const renderPosts = (state, i18nInstance, postsContainer, feedsContainer) => {
     if (!state.posts.length) return;
 
-    const [postsCard, postCardBody, postsUl] = readyCard('posts', i18nInstance);
-    const [feedsCard, feedsCardBody, feedsUl] = readyCard('feeds', i18nInstance);
-    AppendData.feeds(state.feeds, feedsUl);
-    AppendData.posts(state.posts, postsUl);
+    const [postsCard, postCardBody, postsUl] = ReadyData.readyCard('posts', i18nInstance);
+    const [feedsCard, feedsCardBody, feedsUl] = ReadyData.readyCard('feeds', i18nInstance);
+    ReadyData.appendFeeds(state.feeds, feedsUl);
+    ReadyData.appendPosts(state.posts, postsUl);
 
     feedsCard.append(feedsCardBody, feedsUl);
     feedsContainer.append(feedsCard);
