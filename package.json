@@ -30,6 +30,7 @@
     "i18next": "^22.0.5",
     "jest": "^27.1.1",
     "jest-cli": "^27.1.1",
+    "lodash": "^4.17.21",
     "npm-check-updates": "^11.8.5",
     "on-change": "^4.0.1",
     "postcss-preset-env": "^6.7.0",

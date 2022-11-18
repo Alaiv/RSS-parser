@@ -1,9 +1,9 @@
 import { setLocale } from 'yup';
 import * as yup from 'yup';
 
-yup.addMethod(yup.array, 'unique', function(message, mapper = a => a) {
+yup.addMethod(yup.array, 'unique', function(message) {
     return this.test('unique', message, function (list) {
-        return list.length === new Set(list.map(mapper)).size;
+        return list.length === new Set(list).size;
     })
 })
 

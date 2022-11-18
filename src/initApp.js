@@ -15,11 +15,13 @@ const initApp = () => {
     }).then(() => {
         const state = {
             rssField: {
-                valid: true,
                 value: '',
                 errors: [],
                 links: []
-            }
+            },
+            feeds: [],
+            posts: [],
+            status: null,
         };
     
         const form = document.querySelector('.rss-form');
