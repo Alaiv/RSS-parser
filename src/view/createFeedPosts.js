@@ -1,3 +1,4 @@
+import setActivePosts from "../controllers/setActivePosts";
 
 class ReadyData {
     static readyCard(title, i18nInstance) {
@@ -30,12 +31,35 @@ class ReadyData {
         })
     }
 
-    static appendPosts(posts, postsUl) {
-        posts.forEach(post => {
+    static appendPosts(state, postsUl, i18nInstance) {
+        state.posts.forEach(post => {
             const li = document.createElement('li');
+            const type = state.readedPosts[post.id] ? ['fw-normal', 'link-secondary'] : ['fw-bold'];
             li.classList.add('list-group-item', 'd-flex', "justify-content-between", "allign-items-start", "border-0", "border-end-0");
-            const a = `<a href="${post.link}" class="fw-bold" data-id="${post.id}" target="_blank" rel="noopener noreferrer">${post.title}</a>`;
-            li.innerHTML = a;
+
+            const a = document.createElement('a');
+            a.setAttribute('href', post.link);
+            a.classList = type.join(' ');
+            a.dataset.id = post.id;
+            a.setAttribute('target', '_blank');
+            a.setAttribute('rel', 'noopener noreferrer');
+            a.textContent = post.title;
+
+            const button = document.createElement('button');
+            button.classList.add('btn', 'btn-outline-primary', 'btn-sm');
+            button.dataset.id = post.id;
+            button.dataset.bsToggle = 'modal';
+            button.dataset.bsTarget = '#modal';
+            button.textContent = i18nInstance.t('btnLook');
+            li.append(a);
+            li.append(button);
+
+            button.addEventListener('click', (e) => {
+                setActivePosts(e.target, state)
+            });
+            a.addEventListener('click', (e) => {
+                setActivePosts(e.target, state)
+            })
             postsUl.append(li);
         })
     }

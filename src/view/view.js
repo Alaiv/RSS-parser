@@ -13,13 +13,22 @@ const renderMessage = (err, status, i18nInstance) => {
     }
 }
 
+const renderModalContent = (activePost) => {
+    if (!activePost) return;
+    const active = activePost[0];
+    const titleModal = document.querySelector('.modal-title');
+    const bodyModal = document.querySelector('.modal-body');
+    titleModal.textContent = active.title;
+    bodyModal.textContent = active.desc;
+}
+
 const renderPosts = (state, i18nInstance, postsContainer, feedsContainer) => {
     if (!state.posts.length) return;
 
     const [postsCard, postCardBody, postsUl] = ReadyData.readyCard('posts', i18nInstance);
     const [feedsCard, feedsCardBody, feedsUl] = ReadyData.readyCard('feeds', i18nInstance);
     ReadyData.appendFeeds(state.feeds, feedsUl);
-    ReadyData.appendPosts(state.posts, postsUl);
+    ReadyData.appendPosts(state, postsUl, i18nInstance);
 
     feedsCard.append(feedsCardBody, feedsUl);
     feedsContainer.append(feedsCard);
@@ -42,6 +51,7 @@ const render = (state, i18nInstance) => {
         button.removeAttribute('disabled');
     }
     renderPosts(state, i18nInstance, postsContainer, feedsContainer);
+    renderModalContent(state.activePost);
 }
 
 export default render;

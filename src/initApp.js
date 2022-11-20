@@ -22,7 +22,9 @@ const initApp = () => {
             feeds: [],
             posts: [],
             status: null,
-            isUpdating: false
+            isUpdating: false,
+            activePost: null,
+            readedPosts: {}
         };
     
         const form = document.querySelector('.rss-form');
