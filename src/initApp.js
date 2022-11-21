@@ -26,10 +26,10 @@ const initApp = () => {
             activePost: null,
             readedPosts: {}
         };
-    
+
         const form = document.querySelector('.rss-form');
         const input = document.querySelector('#url-input')
-    
+
         const watchedState = onChange(state, () => render(watchedState, i18nInstance));
 
         form.addEventListener('submit', (e) => {
