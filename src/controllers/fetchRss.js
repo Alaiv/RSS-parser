@@ -42,7 +42,7 @@ const fetchRss = (i18nInstance, watchedState, value) => {
                     watchedState.feeds.unshift(feed);
                     insertPosts(posts, feedId, watchedState);
                 } else {
-                    throw new Error(i18nInstance.t('parseErr'));
+                    throw new Error('parseErr');
                 }
             })
             .catch(e => {

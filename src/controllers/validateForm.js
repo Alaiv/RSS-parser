@@ -28,7 +28,7 @@ const validateForm = (form, input, watchedState, schema, i18nInstance, fieldValu
                     })
             })
             .catch((err) => {
-                const errors = err.errors.map((err) => i18nInstance.t(err));
+                const errors = err.errors;
                 watchedState.status = 'invalid';
                 watchedState.rssField.errors = errors;
             });

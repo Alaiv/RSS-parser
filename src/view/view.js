@@ -9,7 +9,7 @@ const renderMessage = (err, status, i18nInstance) => {
     } else {
         element.classList.remove('text-success');
         element.classList.add('text-danger');
-        element.textContent = err;
+        element.textContent = i18nInstance.t(err);
     }
 }
 

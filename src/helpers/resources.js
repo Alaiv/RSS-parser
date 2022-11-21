@@ -7,7 +7,7 @@ export default {
             'RSS success': 'RSS успешно загружен',
             'posts': 'Посты',
             'feeds': 'Фиды',
-            'netWorkErr': 'Ошибка сети',
+            'Network Error': 'Ошибка сети',
             'parseErr': 'Ресурс не содержит валидный RSS',
             'btnLook': 'Просмотр'
         }
