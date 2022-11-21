@@ -6,19 +6,16 @@ const getData = (item) => {
 }
 
 const parse = (docs) => {
-    const stuff = new DOMParser();
-    const dc = stuff.parseFromString(docs, 'application/xml');
-    const channel = dc.documentElement.querySelector('channel');
-    const items = channel.querySelectorAll('item');
-    const posts = [...items].map((item) => getData(item));
-    const feed = getData(channel);
-
-    const pErr = dc.querySelector('parseerror');
-
-    if (pErr) {
+    try {
+        const stuff = new DOMParser();
+        const dc = stuff.parseFromString(docs, 'application/xml');
+        const channel = dc.documentElement.querySelector('channel');
+        const items = channel.querySelectorAll('item');
+        const posts = [...items].map((item) => getData(item));
+        const feed = getData(channel);
+        return [feed, posts, true];  
+    } catch(e) {
         return [[],[],false];
-    } else {
-        return [feed, posts, true];
     }
 };
 
