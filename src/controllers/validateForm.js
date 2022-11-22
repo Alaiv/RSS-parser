@@ -10,7 +10,6 @@ const validateForm = (form, input, watchedState, schema, i18nInstance, fieldValu
   schema.validate({ link: value, links: [...linksCurr, value] }, { abortEarly: false })
     .then(() => {
       watchedState.rssField.errors = [];
-      linksCurr.push(value);
       form.reset();
       input.focus();
     })
@@ -18,6 +17,7 @@ const validateForm = (form, input, watchedState, schema, i18nInstance, fieldValu
       watchedState.status = 'fetching';
       fetchRss(i18nInstance, watchedState, value)
         .then(() => {
+          linksCurr.push(value);
           if (!watchedState.isUpdating) {
             watchedState.isUpdating = true;
             setTimeout(() => checkForRssUpdates(linksCurr, i18nInstance, watchedState), 5000);

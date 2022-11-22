@@ -2,7 +2,6 @@ import axios from 'axios';
 
 const startFetch = (value, i18nInstance) => axios.get(`https://allorigins.hexlet.app/get?disableCache=true&url=${encodeURIComponent(value)}`)
   .then((response) => {
-    console.log(response.status);
     if (response.status === 200) {
       return response.data;
     }
