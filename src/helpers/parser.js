@@ -3,6 +3,11 @@ class RssData {
     this.title = item.querySelector('title').textContent.trim();
     this.desc = item.querySelector('description').textContent.trim();
     this.link = item.querySelector('link').nextSibling.textContent.trim();
+    this.id = this.setId.bind(this);
+  }
+
+  setId(id) {
+    this.id = id;
   }
 }
 const parse = (docs) => {

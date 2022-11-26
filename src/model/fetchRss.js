@@ -3,7 +3,10 @@ import _ from 'lodash';
 import parse from '../helpers/parser';
 import startFetch from '../helpers/api';
 
-const insertPosts = (posts, feedId) => posts.map((p) => ({ ...p, id: _.uniqueId(), feedId }));
+const insertPosts = (posts, fId) => posts.map((p) => {
+  p.setId(_.uniqueId());
+  return { ...p, fId };
+});
 
 export const checkForRssUpdates = (links, i18nInstance, state) => {
   const promises = links.map((link) => startFetch(link, i18nInstance)
@@ -27,10 +30,9 @@ const fetchRss = (i18nInstance, watchedState, value) => startFetch(value, i18nIn
   .then((data) => {
     const [feed, posts, success] = parse(data.contents);
     if (success) {
-      const feedId = _.uniqueId();
-      feed.id = feedId;
+      feed.setId(_.uniqueId());
       watchedState.feeds.unshift(feed);
-      const newPosts = insertPosts(posts, feedId, watchedState);
+      const newPosts = insertPosts(posts, feed.id);
       watchedState.posts = newPosts;
       watchedState.status = 'valid';
     } else {

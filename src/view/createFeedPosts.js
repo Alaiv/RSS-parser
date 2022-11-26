@@ -1,4 +1,4 @@
-import setActivePosts from '../controllers/setActivePosts';
+import onPostOpen from '../controllers/onPostOpen';
 
 class ReadyData {
   static readyCard(title, i18nInstance) {
@@ -55,10 +55,10 @@ class ReadyData {
       li.append(button);
 
       button.addEventListener('click', (e) => {
-        setActivePosts(e.target, state);
+        onPostOpen(e.target, state);
       });
       a.addEventListener('click', (e) => {
-        setActivePosts(e.target, state);
+        onPostOpen(e.target, state);
       });
       postsUl.append(li);
     });
